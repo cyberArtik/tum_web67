@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import MobileBottomNav from "@/components/layout/MobileBottomNav";
+import Catalog from "@/pages/Catalog";
 import Index from "@/pages/Index";
 import NotFound from "@/pages/NotFound";
 
@@ -14,6 +15,7 @@ function App() {
         <main className="flex-1">
           <Routes>
             <Route path="/" element={<Index />} />
+            <Route path="/catalog" element={<Catalog />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </main>
