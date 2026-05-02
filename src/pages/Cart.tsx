@@ -11,17 +11,20 @@ import {
   Trash2,
   Truck,
 } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { Link, useNavigate } from "react-router-dom";
 
 import { Button } from "@/components/ui/button";
 import { useCart } from "@/contexts/CartContext";
-import { CURRENCY_SYMBOL, DEFAULT_LANG, FREE_SHIPPING_THRESHOLD } from "@/lib/constants";
-import { getLocalizedField } from "@/types";
+import { CURRENCY_SYMBOL, FREE_SHIPPING_THRESHOLD } from "@/lib/constants";
+import { getLocalizedField, type Language } from "@/types";
 
 type Step = "cart" | "success";
 
 const Cart = () => {
   const navigate = useNavigate();
+  const { t, i18n } = useTranslation();
+  const lang = (i18n.resolvedLanguage ?? i18n.language ?? "ro").slice(0, 2) as Language;
   const { items, removeItem, updateQuantity, clearCart, totalItems, totalPrice } = useCart();
   const [step, setStep] = useState<Step>("cart");
 
@@ -53,10 +56,10 @@ const Cart = () => {
           </motion.div>
 
           <h1 className="mb-3 font-display text-2xl font-bold text-foreground md:text-3xl">
-            Order placed!
+            {t("cart.order_placed")}
           </h1>
           <p className="mb-2 font-body text-lg font-semibold text-primary">
-            We will call you shortly to confirm.
+            {t("cart.operator_contact")}
           </p>
           <div className="mb-8 flex items-center justify-center gap-2 text-muted-foreground">
             <Phone className="h-4 w-4" />
@@ -73,11 +76,11 @@ const Cart = () => {
               onClick={() => navigate("/catalog")}
               className="rounded-full px-6 font-display font-semibold"
             >
-              Continue shopping
+              {t("cart.continue_shopping")}
             </Button>
             <Link to="/">
               <Button variant="outline" className="rounded-full px-6 font-display font-semibold">
-                Back home
+                {t("cart.back_home")}
               </Button>
             </Link>
           </div>
@@ -96,15 +99,14 @@ const Cart = () => {
         >
           <ShoppingCart className="mx-auto mb-4 h-16 w-16 text-muted-foreground/30" />
           <h1 className="mb-2 font-display text-xl font-semibold text-foreground">
-            Your cart is empty
+            {t("cart.empty_title")}
           </h1>
           <p className="mx-auto mb-6 max-w-md font-body text-muted-foreground">
-            Add a few toys and they will land here. The cart stays in this browser
-            even after you close the tab.
+            {t("cart.empty_desc")}
           </p>
           <Link to="/catalog">
             <Button className="rounded-full px-6 font-display font-semibold">
-              Browse catalog
+              {t("cart.browse_catalog")}
             </Button>
           </Link>
         </motion.div>
@@ -123,11 +125,11 @@ const Cart = () => {
           to="/catalog"
           className="mb-3 inline-flex items-center gap-1.5 font-body text-sm text-muted-foreground transition-colors hover:text-foreground"
         >
-          <ArrowLeft className="h-4 w-4" /> Continue shopping
+          <ArrowLeft className="h-4 w-4" /> {t("cart.continue_shopping")}
         </Link>
         <h1 className="flex items-center gap-3 font-display text-3xl font-bold text-foreground md:text-4xl">
           <ShoppingCart className="h-8 w-8 text-primary" />
-          Your cart
+          {t("cart.title")}
           <span className="font-body text-base font-normal text-muted-foreground">
             ({totalItems})
           </span>
@@ -135,11 +137,10 @@ const Cart = () => {
       </motion.div>
 
       <div className="grid gap-8 lg:grid-cols-3">
-        {/* Items */}
         <div className="space-y-3 lg:col-span-2">
           <AnimatePresence initial={false}>
             {items.map((item) => {
-              const name = getLocalizedField(item.product, "name", DEFAULT_LANG);
+              const name = getLocalizedField(item.product, "name", lang);
               return (
                 <motion.div
                   key={item.product.id}
@@ -177,11 +178,9 @@ const Cart = () => {
                     <div className="mt-2 flex items-center justify-between">
                       <div className="flex items-center gap-1.5">
                         <button
-                          onClick={() =>
-                            updateQuantity(item.product.id, item.quantity - 1)
-                          }
+                          onClick={() => updateQuantity(item.product.id, item.quantity - 1)}
                           className="flex h-8 w-8 items-center justify-center rounded-full border border-border transition-colors hover:bg-muted"
-                          aria-label="Decrease quantity"
+                          aria-label="-"
                         >
                           <Minus className="h-3.5 w-3.5" />
                         </button>
@@ -189,11 +188,9 @@ const Cart = () => {
                           {item.quantity}
                         </span>
                         <button
-                          onClick={() =>
-                            updateQuantity(item.product.id, item.quantity + 1)
-                          }
+                          onClick={() => updateQuantity(item.product.id, item.quantity + 1)}
                           className="flex h-8 w-8 items-center justify-center rounded-full border border-border transition-colors hover:bg-muted"
-                          aria-label="Increase quantity"
+                          aria-label="+"
                         >
                           <Plus className="h-3.5 w-3.5" />
                         </button>
@@ -206,7 +203,7 @@ const Cart = () => {
                         <button
                           onClick={() => removeItem(item.product.id)}
                           className="rounded-full p-1.5 text-muted-foreground transition-colors hover:bg-destructive/10 hover:text-destructive"
-                          aria-label="Remove from cart"
+                          aria-label={t("wishlist.clear_all")}
                         >
                           <Trash2 className="h-4 w-4" />
                         </button>
@@ -219,38 +216,37 @@ const Cart = () => {
           </AnimatePresence>
         </div>
 
-        {/* Summary */}
         <div className="lg:col-span-1">
           <div className="sticky top-32 space-y-4 rounded-2xl border border-border bg-card p-6">
-            <h2 className="font-display text-lg font-bold text-foreground">Order summary</h2>
+            <h2 className="font-display text-lg font-bold text-foreground">{t("cart.title")}</h2>
 
             <div className="flex justify-between font-body text-sm">
-              <span className="text-muted-foreground">Subtotal</span>
+              <span className="text-muted-foreground">{t("cart.subtotal")}</span>
               <span className="font-semibold text-foreground">
                 {totalPrice.toFixed(0)} {CURRENCY_SYMBOL}
               </span>
             </div>
 
             <div className="flex justify-between font-body text-sm">
-              <span className="text-muted-foreground">Shipping</span>
+              <span className="text-muted-foreground">{t("cart.shipping")}</span>
               <span
                 className={`font-semibold ${freeShipping ? "text-green-600 dark:text-green-400" : "text-foreground"}`}
               >
-                {freeShipping ? "Free" : "Calculated later"}
+                {freeShipping ? t("cart.free") : t("cart.calculated_later")}
               </span>
             </div>
 
             {!freeShipping && (
               <div className="flex items-center gap-2 rounded-xl bg-muted/50 p-3 font-body text-xs text-muted-foreground">
                 <Truck className="h-4 w-4 shrink-0" />
-                Add {remainingForFree.toFixed(0)} {CURRENCY_SYMBOL} more for free shipping
+                {t("cart.free_shipping_hint", { amount: remainingForFree.toFixed(0) })}
               </div>
             )}
 
             <div className="h-px bg-border" />
 
             <div className="flex items-baseline justify-between">
-              <span className="font-display font-bold text-foreground">Total</span>
+              <span className="font-display font-bold text-foreground">{t("cart.total")}</span>
               <span className="font-display text-2xl font-bold text-primary">
                 {totalPrice.toFixed(0)} {CURRENCY_SYMBOL}
               </span>
@@ -261,12 +257,12 @@ const Cart = () => {
               size="lg"
               className="w-full rounded-xl py-6 font-display text-base font-bold"
             >
-              <ShoppingBag className="mr-2 h-5 w-5" /> Place order
+              <ShoppingBag className="mr-2 h-5 w-5" /> {t("cart.place_order")}
             </Button>
 
             <p className="text-center font-body text-xs text-muted-foreground">
               <Phone className="mr-1 inline h-3 w-3" />
-              An operator will call to confirm
+              {t("cart.operator_will_call")}
             </p>
           </div>
         </div>

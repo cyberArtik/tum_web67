@@ -1,0 +1,93 @@
+{
+  "lang": { "ro": "RO", "ru": "RU", "en": "EN" },
+  "nav": {
+    "search_placeholder": "Caută jucării, branduri, vârste...",
+    "search": "Caută",
+    "all": "Toate",
+    "wishlist": "Favorite",
+    "cart": "Coș",
+    "menu": "Meniu",
+    "free_shipping_strip": "Livrare gratuită peste 500 Lei"
+  },
+  "mobile_nav": {
+    "shop": "Magazin",
+    "catalog": "Catalog",
+    "wishlist": "Favorite",
+    "cart": "Coș",
+    "menu": "Meniu"
+  },
+  "hero": {
+    "badge": "Livrare gratuită peste 500 Lei",
+    "title": "Jucării care aprind",
+    "title_highlight": "imaginația",
+    "description": "Jucării alese cu grijă pentru orice vârstă. Pluș moale, lemn clasic, seturi de construcție, jocuri de societate și multe altele — toate de la branduri în care părinții au încredere.",
+    "cta_shop": "Cumpără acum",
+    "cta_sale": "Reduceri %"
+  },
+  "promo": {
+    "free_shipping_title": "Livrare gratuită",
+    "free_shipping_desc": "Peste 500 Lei",
+    "gift_title": "Ambalaj cadou",
+    "gift_desc": "La cerere",
+    "safe_title": "Materiale sigure",
+    "safe_desc": "Certificate non-toxice",
+    "returns_title": "Retururi simple",
+    "returns_desc": "Politică 14 zile"
+  },
+  "footer": {
+    "tagline": "Jucării care aprind imaginația — pentru mânuțe mici și visuri mari.",
+    "shop": "Magazin",
+    "help": "Ajutor",
+    "company": "Companie",
+    "rights": "Toate drepturile rezervate.",
+    "links": {
+      "new_arrivals": "Noutăți",
+      "bestsellers": "Best-seller-uri",
+      "sale": "Reduceri",
+      "gift_cards": "Carduri cadou",
+      "shipping": "Livrare",
+      "returns": "Retururi",
+      "faq": "Întrebări frecvente",
+      "contact": "Contact",
+      "about_us": "Despre noi",
+      "blog": "Blog",
+      "careers": "Cariere",
+      "press": "Presă"
+    }
+  },
+  "product": {
+    "add_to_cart": "Adaugă în coș",
+    "out_of_stock": "Stoc epuizat",
+    "only_n_left": "Doar {{count}} rămase"
+  },
+  "wishlist": {
+    "title": "Lista de favorite",
+    "clear_all": "Șterge tot",
+    "empty_title": "Lista ta e goală",
+    "empty_desc": "Apasă pe inimioara oricărei jucării și va apărea aici. Lista rămâne în acest browser chiar și după ce închizi tab-ul.",
+    "browse_catalog": "Vezi catalogul"
+  },
+  "cart": {
+    "title": "Coșul tău",
+    "continue_shopping": "Continuă cumpărăturile",
+    "empty_title": "Coșul tău e gol",
+    "empty_desc": "Adaugă câteva jucării și vor apărea aici. Coșul rămâne în acest browser chiar și după ce închizi tab-ul.",
+    "browse_catalog": "Vezi catalogul",
+    "subtotal": "Subtotal",
+    "shipping": "Livrare",
+    "free": "Gratuită",
+    "calculated_later": "Calculată ulterior",
+    "total": "Total",
+    "place_order": "Plasează comanda",
+    "free_shipping_hint": "Adaugă încă {{amount}} Lei pentru livrare gratuită",
+    "operator_will_call": "Un operator te va suna pentru confirmare",
+    "order_placed": "Comanda a fost plasată!",
+    "operator_contact": "Te vom suna în curând pentru confirmare.",
+    "back_home": "Înapoi acasă"
+  },
+  "not_found": {
+    "title": "Pagină negăsită",
+    "desc": "Jucăria pe care o căutai trebuie să se fi rostogolit sub canapea. Hai să te ducem înapoi la magazin.",
+    "back_home": "Înapoi acasă"
+  }
+}

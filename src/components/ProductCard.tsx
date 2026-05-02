@@ -1,11 +1,12 @@
 import { motion } from "framer-motion";
 import { Eye, Heart, ShoppingCart, Star } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
 import { useCart } from "@/contexts/CartContext";
 import { useWishlist } from "@/contexts/WishlistContext";
-import { CURRENCY_SYMBOL, DEFAULT_LANG } from "@/lib/constants";
-import { getLocalizedField, type Product } from "@/types";
+import { CURRENCY_SYMBOL } from "@/lib/constants";
+import { getLocalizedField, type Language, type Product } from "@/types";
 
 interface ProductCardProps {
   product: Product;
@@ -21,11 +22,13 @@ const TAG_COLORS: Record<string, string> = {
 };
 
 const ProductCard = ({ product }: ProductCardProps) => {
+  const { t, i18n } = useTranslation();
+  const lang = (i18n.resolvedLanguage ?? i18n.language ?? "ro").slice(0, 2) as Language;
   const { isInWishlist, toggle } = useWishlist();
   const { addItem } = useCart();
   const liked = isInWishlist(product.id);
-  const name = getLocalizedField(product, "name", DEFAULT_LANG);
-  const tag = product.tags?.find((t) => TAG_COLORS[t]) ?? product.tags?.[0];
+  const name = getLocalizedField(product, "name", lang);
+  const tag = product.tags?.find((tg) => TAG_COLORS[tg]) ?? product.tags?.[0];
 
   const discount = product.original_price
     ? Math.round(((product.original_price - product.price) / product.original_price) * 100)
@@ -103,14 +106,14 @@ const ProductCard = ({ product }: ProductCardProps) => {
             onClick={handleAddToCart}
             className="flex w-full items-center justify-center gap-2 rounded-xl bg-primary py-2.5 font-display text-sm font-semibold text-primary-foreground shadow-lg transition-opacity hover:opacity-90"
           >
-            <ShoppingCart className="h-4 w-4" /> Add to cart
+            <ShoppingCart className="h-4 w-4" /> {t("product.add_to_cart")}
           </button>
         </div>
 
         {product.stock === 0 && (
           <div className="absolute inset-0 flex items-center justify-center bg-background/60 backdrop-blur-[2px]">
             <span className="rounded-full bg-card/90 px-4 py-2 font-display text-sm font-bold text-foreground/70">
-              Out of stock
+              {t("product.out_of_stock")}
             </span>
           </div>
         )}
@@ -152,7 +155,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
 
         {product.stock > 0 && product.stock <= 5 && (
           <p className="font-body text-[11px] font-semibold text-fun-orange">
-            Only {product.stock} left
+            {t("product.only_n_left", { count: product.stock })}
           </p>
         )}
       </Link>

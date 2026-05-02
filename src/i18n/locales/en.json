@@ -1,0 +1,93 @@
+{
+  "lang": { "ro": "RO", "ru": "RU", "en": "EN" },
+  "nav": {
+    "search_placeholder": "Search toys, brands, ages...",
+    "search": "Search",
+    "all": "All",
+    "wishlist": "Wishlist",
+    "cart": "Cart",
+    "menu": "Menu",
+    "free_shipping_strip": "Free shipping over 500 Lei"
+  },
+  "mobile_nav": {
+    "shop": "Shop",
+    "catalog": "Catalog",
+    "wishlist": "Wishlist",
+    "cart": "Cart",
+    "menu": "Menu"
+  },
+  "hero": {
+    "badge": "Free shipping over 500 Lei",
+    "title": "Toys that spark",
+    "title_highlight": "imagination",
+    "description": "Hand-picked toys for every age. Soft plush, classic wood, building sets, board games and more — all from brands parents trust.",
+    "cta_shop": "Shop now",
+    "cta_sale": "Sale %"
+  },
+  "promo": {
+    "free_shipping_title": "Free shipping",
+    "free_shipping_desc": "Over 500 Lei",
+    "gift_title": "Gift wrapping",
+    "gift_desc": "On request",
+    "safe_title": "Safe materials",
+    "safe_desc": "Certified non-toxic",
+    "returns_title": "Easy returns",
+    "returns_desc": "14 days policy"
+  },
+  "footer": {
+    "tagline": "Toys that spark imagination — for tiny hands and bigger dreams.",
+    "shop": "Shop",
+    "help": "Help",
+    "company": "Company",
+    "rights": "All rights reserved.",
+    "links": {
+      "new_arrivals": "New arrivals",
+      "bestsellers": "Bestsellers",
+      "sale": "Sale",
+      "gift_cards": "Gift cards",
+      "shipping": "Shipping",
+      "returns": "Returns",
+      "faq": "FAQ",
+      "contact": "Contact",
+      "about_us": "About us",
+      "blog": "Blog",
+      "careers": "Careers",
+      "press": "Press"
+    }
+  },
+  "product": {
+    "add_to_cart": "Add to cart",
+    "out_of_stock": "Out of stock",
+    "only_n_left": "Only {{count}} left"
+  },
+  "wishlist": {
+    "title": "Your wishlist",
+    "clear_all": "Clear all",
+    "empty_title": "Your wishlist is empty",
+    "empty_desc": "Tap the heart on any toy you love and it will land here. Your list stays in this browser even after you close the tab.",
+    "browse_catalog": "Browse catalog"
+  },
+  "cart": {
+    "title": "Your cart",
+    "continue_shopping": "Continue shopping",
+    "empty_title": "Your cart is empty",
+    "empty_desc": "Add a few toys and they will land here. The cart stays in this browser even after you close the tab.",
+    "browse_catalog": "Browse catalog",
+    "subtotal": "Subtotal",
+    "shipping": "Shipping",
+    "free": "Free",
+    "calculated_later": "Calculated later",
+    "total": "Total",
+    "place_order": "Place order",
+    "free_shipping_hint": "Add {{amount}} Lei more for free shipping",
+    "operator_will_call": "An operator will call to confirm",
+    "order_placed": "Order placed!",
+    "operator_contact": "We will call you shortly to confirm.",
+    "back_home": "Back home"
+  },
+  "not_found": {
+    "title": "Page not found",
+    "desc": "The toy you were looking for must have rolled under the couch. Let's get you back to the shop.",
+    "back_home": "Back home"
+  }
+}
