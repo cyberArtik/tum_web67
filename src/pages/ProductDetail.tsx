@@ -19,7 +19,7 @@ import ProductCard from "@/components/ProductCard";
 import { Button } from "@/components/ui/button";
 import { useCart } from "@/contexts/CartContext";
 import { useWishlist } from "@/contexts/WishlistContext";
-import { getProductById, MOCK_PRODUCTS } from "@/data/products";
+import { useProduct, useProducts } from "@/hooks/useProducts";
 import { CURRENCY_SYMBOL, DEFAULT_LANG } from "@/lib/constants";
 import { getLocalizedField } from "@/types";
 
@@ -30,7 +30,8 @@ const ProductDetail = () => {
   const { addItem } = useCart();
   const [quantity, setQuantity] = useState(1);
 
-  const product = getProductById(Number(id));
+  const product = useProduct(Number(id));
+  const allProducts = useProducts();
 
   if (!product) {
     return (
@@ -54,9 +55,9 @@ const ProductDetail = () => {
     ? Math.round(((product.original_price - product.price) / product.original_price) * 100)
     : 0;
 
-  const related = MOCK_PRODUCTS.filter(
-    (p) => p.category === product.category && p.id !== product.id,
-  ).slice(0, 4);
+  const related = allProducts
+    .filter((p) => p.category === product.category && p.id !== product.id)
+    .slice(0, 4);
 
   const handleAddToCart = () => {
     addItem(product, quantity);

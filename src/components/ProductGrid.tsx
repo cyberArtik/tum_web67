@@ -4,10 +4,10 @@ import { Link } from "react-router-dom";
 
 import ProductCard from "./ProductCard";
 import { Button } from "@/components/ui/button";
-import { MOCK_PRODUCTS } from "@/data/products";
+import { useProducts } from "@/hooks/useProducts";
 
 const ProductGrid = () => {
-  const products = MOCK_PRODUCTS.slice(0, 8);
+  const products = useProducts().slice(0, 8);
 
   return (
     <section id="shop" className="bg-background py-16">
