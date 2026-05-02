@@ -1,15 +1,17 @@
 import { motion } from "framer-motion";
 import { ArrowRight, Sparkles } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
 import { Button } from "@/components/ui/button";
 
 const HeroSection = () => {
+  const { t } = useTranslation();
+
   return (
     <section className="relative overflow-hidden bg-gradient-to-br from-primary/5 via-background to-accent/10">
       <div className="container mx-auto px-4 py-12 md:py-20">
         <div className="grid items-center gap-8 md:grid-cols-2 md:gap-12">
-          {/* Text */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
@@ -18,13 +20,13 @@ const HeroSection = () => {
           >
             <div className="inline-flex items-center gap-2 rounded-full bg-accent/20 px-4 py-1.5 font-body text-sm font-semibold text-accent-foreground">
               <Sparkles className="h-4 w-4 text-accent" />
-              Free shipping over 500 Lei
+              {t("hero.badge")}
             </div>
 
             <h1 className="font-display text-4xl font-bold leading-tight text-foreground md:text-5xl lg:text-6xl">
-              Toys that spark{" "}
+              {t("hero.title")}{" "}
               <span className="relative text-primary">
-                imagination
+                {t("hero.title_highlight")}
                 <svg className="absolute -bottom-2 left-0 w-full" viewBox="0 0 200 12" fill="none">
                   <path
                     d="M2 8C50 2 150 2 198 8"
@@ -37,14 +39,13 @@ const HeroSection = () => {
             </h1>
 
             <p className="max-w-lg font-body text-lg leading-relaxed text-muted-foreground">
-              Hand-picked toys for every age. Soft plush, classic wood, building
-              sets, board games and more — all from brands parents trust.
+              {t("hero.description")}
             </p>
 
             <div className="flex flex-wrap justify-center gap-3 md:justify-start">
               <Link to="/catalog">
                 <Button size="lg" className="gap-2 rounded-full px-8 font-display text-base font-semibold shadow-toy">
-                  Shop now
+                  {t("hero.cta_shop")}
                   <ArrowRight className="h-4 w-4" />
                 </Button>
               </Link>
@@ -54,13 +55,12 @@ const HeroSection = () => {
                   variant="outline"
                   className="gap-2 rounded-full border-2 px-8 font-display text-base font-semibold"
                 >
-                  Sale %
+                  {t("hero.cta_sale")}
                 </Button>
               </Link>
             </div>
           </motion.div>
 
-          {/* Visual */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
@@ -80,7 +80,7 @@ const HeroSection = () => {
                 transition={{ delay: 0.6, type: "spring" }}
                 className="absolute bottom-4 right-4 rounded-2xl bg-secondary px-4 py-2 font-display text-sm font-bold text-secondary-foreground shadow-lg"
               >
-                -20% Sale
+                -20% {t("hero.cta_sale")}
               </motion.div>
             </div>
             <div className="absolute -bottom-6 -left-6 h-24 w-24 rounded-full bg-accent/20 blur-2xl" />

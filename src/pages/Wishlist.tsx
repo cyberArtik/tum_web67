@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
 import ProductCard from "@/components/ProductCard";
+import SEO from "@/components/SEO";
 import { Button } from "@/components/ui/button";
 import { useWishlist } from "@/contexts/WishlistContext";
 import { useProducts } from "@/hooks/useProducts";
@@ -16,6 +17,7 @@ const Wishlist = () => {
 
   return (
     <main className="container mx-auto min-h-[60vh] px-4 py-10">
+      <SEO title={t("wishlist.title")} noIndex />
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -24,7 +26,6 @@ const Wishlist = () => {
         <h1 className="flex items-center gap-3 font-display text-3xl font-bold text-foreground md:text-4xl">
           <Heart className="h-8 w-8 fill-primary text-primary" />
           {t("wishlist.title")}
-          Your wishlist
           <span className="font-body text-base font-semibold text-muted-foreground">
             ({wishlistProducts.length})
           </span>
@@ -36,7 +37,6 @@ const Wishlist = () => {
             className="gap-2 rounded-full font-display font-semibold"
           >
             <Trash2 className="h-4 w-4" /> {t("wishlist.clear_all")}
-            <Trash2 className="h-4 w-4" /> Clear all
           </Button>
         )}
       </motion.div>
@@ -63,15 +63,6 @@ const Wishlist = () => {
           <Link to="/catalog">
             <Button className="rounded-full px-6 font-display font-semibold">
               {t("wishlist.browse_catalog")}
-            Your wishlist is empty
-          </h2>
-          <p className="mx-auto mb-6 max-w-md font-body text-muted-foreground">
-            Tap the heart on any toy you love and it will land here. Your list
-            stays in this browser even after you close the tab.
-          </p>
-          <Link to="/catalog">
-            <Button className="rounded-full px-6 font-display font-semibold">
-              Browse catalog
             </Button>
           </Link>
         </motion.div>
