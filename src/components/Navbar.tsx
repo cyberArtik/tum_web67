@@ -2,12 +2,14 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Heart, Menu, Phone, Search, ShoppingCart, Truck, X } from "lucide-react";
 
+import { useWishlist } from "@/contexts/WishlistContext";
 import { CATEGORIES } from "@/data/products";
 
 const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const navigate = useNavigate();
+  const { count: wishlistCount } = useWishlist();
 
   const handleSearchSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -20,7 +22,6 @@ const Navbar = () => {
 
   return (
     <>
-      {/* Top info bar (desktop only) */}
       <div className="hidden bg-foreground text-background text-xs md:block">
         <div className="container mx-auto flex items-center justify-between px-4 py-1.5">
           <div className="flex items-center gap-6">
@@ -36,14 +37,12 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* Main navbar */}
       <nav className="sticky top-0 z-50 border-b border-border bg-card/95 shadow-sm backdrop-blur-lg">
         <div className="container mx-auto flex items-center gap-4 px-4 py-2.5">
           <Link to="/" className="shrink-0 font-display text-2xl font-bold tracking-tight text-primary">
             fun<span className="text-accent">kids</span>
           </Link>
 
-          {/* Desktop search */}
           <form onSubmit={handleSearchSubmit} className="relative hidden max-w-xl flex-1 md:block">
             <input
               type="text"
@@ -61,14 +60,18 @@ const Navbar = () => {
             </button>
           </form>
 
-          {/* Right side */}
           <div className="ml-auto flex items-center gap-1">
             <button
               onClick={() => navigate("/wishlist")}
-              className="hidden rounded-full p-2 transition-colors hover:bg-muted sm:flex"
+              className="relative hidden rounded-full p-2 transition-colors hover:bg-muted sm:flex"
               aria-label="Wishlist"
             >
               <Heart className="h-5 w-5 text-foreground/70" />
+              {wishlistCount > 0 && (
+                <span className="absolute -right-0.5 -top-0.5 flex h-[18px] min-w-[18px] items-center justify-center rounded-full bg-primary px-1 text-[10px] font-bold text-primary-foreground">
+                  {wishlistCount}
+                </span>
+              )}
             </button>
             <button
               onClick={() => navigate("/cart")}
@@ -87,7 +90,6 @@ const Navbar = () => {
           </div>
         </div>
 
-        {/* Desktop category strip */}
         <div className="hidden border-t border-border bg-card/60 md:block">
           <div className="container mx-auto flex items-center gap-1 overflow-x-auto px-4 py-2 text-sm">
             <Link
@@ -108,7 +110,6 @@ const Navbar = () => {
           </div>
         </div>
 
-        {/* Mobile menu */}
         {mobileOpen && (
           <div className="border-t border-border bg-card md:hidden">
             <div className="container mx-auto flex flex-col gap-1 px-4 py-3">

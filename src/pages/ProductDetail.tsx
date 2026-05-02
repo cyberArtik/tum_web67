@@ -17,6 +17,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 
 import ProductCard from "@/components/ProductCard";
 import { Button } from "@/components/ui/button";
+import { useWishlist } from "@/contexts/WishlistContext";
 import { getProductById, MOCK_PRODUCTS } from "@/data/products";
 import { CURRENCY_SYMBOL, DEFAULT_LANG } from "@/lib/constants";
 import { getLocalizedField } from "@/types";
@@ -24,8 +25,8 @@ import { getLocalizedField } from "@/types";
 const ProductDetail = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
+  const { isInWishlist, toggle } = useWishlist();
   const [quantity, setQuantity] = useState(1);
-  const [liked, setLiked] = useState(false);
 
   const product = getProductById(Number(id));
 
@@ -44,6 +45,7 @@ const ProductDetail = () => {
     );
   }
 
+  const liked = isInWishlist(product.id);
   const name = getLocalizedField(product, "name", DEFAULT_LANG);
   const description = getLocalizedField(product, "description", DEFAULT_LANG);
   const discount = product.original_price
@@ -207,7 +209,7 @@ const ProductDetail = () => {
               <ShoppingCart className="h-5 w-5" /> Add to cart
             </Button>
             <button
-              onClick={() => setLiked((v) => !v)}
+              onClick={() => toggle(product.id)}
               className={`rounded-full border-2 p-3 transition-all ${
                 liked
                   ? "border-primary bg-primary/10 text-primary"
