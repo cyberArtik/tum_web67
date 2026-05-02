@@ -16,6 +16,7 @@ import {
 import { Link, useNavigate, useParams } from "react-router-dom";
 
 import ProductCard from "@/components/ProductCard";
+import SEO from "@/components/SEO";
 import { Button } from "@/components/ui/button";
 import { useCart } from "@/contexts/CartContext";
 import { useWishlist } from "@/contexts/WishlistContext";
@@ -36,6 +37,7 @@ const ProductDetail = () => {
   if (!product) {
     return (
       <div className="container mx-auto px-4 py-20 text-center">
+        <SEO title="Not found" noIndex />
         <Package className="mx-auto mb-4 h-16 w-16 text-muted-foreground/30" />
         <h1 className="mb-2 font-display text-2xl font-bold">Product not found</h1>
         <p className="mb-6 font-body text-muted-foreground">
@@ -66,6 +68,7 @@ const ProductDetail = () => {
 
   return (
     <main className="container mx-auto px-4 py-6">
+      <SEO title={name} description={description || undefined} image={product.image_url} type="product" />
       <nav className="mb-6 flex flex-wrap items-center gap-2 font-body text-sm text-muted-foreground">
         <Link to="/" className="transition-colors hover:text-primary">Home</Link>
         <ChevronRight className="h-3 w-3" />

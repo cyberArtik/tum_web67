@@ -14,6 +14,7 @@ import {
 import { useTranslation } from "react-i18next";
 import { Link, useNavigate } from "react-router-dom";
 
+import SEO from "@/components/SEO";
 import { Button } from "@/components/ui/button";
 import { useCart } from "@/contexts/CartContext";
 import { CURRENCY_SYMBOL, FREE_SHIPPING_THRESHOLD } from "@/lib/constants";
@@ -41,6 +42,7 @@ const Cart = () => {
   if (step === "success") {
     return (
       <main className="container mx-auto flex min-h-[60vh] items-center justify-center px-4 py-16">
+        <SEO title={t("cart.order_placed")} noIndex />
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -92,6 +94,7 @@ const Cart = () => {
   if (items.length === 0) {
     return (
       <main className="container mx-auto min-h-[60vh] px-4 py-10">
+        <SEO title={t("cart.title")} noIndex />
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -116,6 +119,7 @@ const Cart = () => {
 
   return (
     <main className="container mx-auto min-h-[60vh] px-4 pb-24 pt-8 md:pb-8">
+      <SEO title={t("cart.title")} noIndex />
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}

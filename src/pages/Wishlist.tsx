@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
 import ProductCard from "@/components/ProductCard";
+import SEO from "@/components/SEO";
 import { Button } from "@/components/ui/button";
 import { useWishlist } from "@/contexts/WishlistContext";
 import { useProducts } from "@/hooks/useProducts";
@@ -16,6 +17,7 @@ const Wishlist = () => {
 
   return (
     <main className="container mx-auto min-h-[60vh] px-4 py-10">
+      <SEO title={t("wishlist.title")} noIndex />
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}

@@ -2,6 +2,7 @@ import HeroSection from "@/components/HeroSection";
 import ProductGrid from "@/components/ProductGrid";
 import ProductSection from "@/components/ProductSection";
 import PromoBar from "@/components/PromoBar";
+import SEO from "@/components/SEO";
 import { useProducts } from "@/hooks/useProducts";
 
 const Index = () => {
@@ -14,6 +15,7 @@ const Index = () => {
 
   return (
     <>
+      <SEO />
       <HeroSection />
       <PromoBar />
       <ProductGrid />

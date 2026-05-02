@@ -14,6 +14,7 @@ import {
 import { Link, useSearchParams } from "react-router-dom";
 
 import ProductCard from "@/components/ProductCard";
+import SEO from "@/components/SEO";
 import { Button } from "@/components/ui/button";
 import { AGE_GROUPS, CATEGORIES } from "@/data/products";
 import { useProducts } from "@/hooks/useProducts";
@@ -312,6 +313,7 @@ const Catalog = () => {
 
   return (
     <main className="container mx-auto px-4 py-6">
+      <SEO title="Catalog" />
       <nav className="mb-6 flex items-center gap-2 font-body text-sm text-muted-foreground">
         <Link to="/" className="transition-colors hover:text-primary">Home</Link>
         <span>/</span>

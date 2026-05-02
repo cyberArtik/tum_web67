@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+Allow: /catalog
+Allow: /product/
+
+Disallow: /cart
+Disallow: /wishlist
+
+Sitemap: /sitemap.xml
