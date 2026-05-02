@@ -1,12 +1,14 @@
 import { Heart, Menu, Search, ShoppingCart, Store } from "lucide-react";
 import { useNavigate, useLocation } from "react-router-dom";
 
+import { useCart } from "@/contexts/CartContext";
 import { useWishlist } from "@/contexts/WishlistContext";
 
 const MobileBottomNav = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { count: wishlistCount } = useWishlist();
+  const { totalItems: cartCount } = useCart();
 
   const isActive = (path: string) => location.pathname === path;
 
@@ -20,7 +22,13 @@ const MobileBottomNav = () => {
       action: () => navigate("/wishlist"),
       badge: wishlistCount,
     },
-    { icon: ShoppingCart, label: "Cart", path: "/cart", action: () => navigate("/cart") },
+    {
+      icon: ShoppingCart,
+      label: "Cart",
+      path: "/cart",
+      action: () => navigate("/cart"),
+      badge: cartCount,
+    },
     { icon: Menu, label: "Menu", path: "#menu", action: () => window.scrollTo({ top: 0, behavior: "smooth" }) },
   ];
 

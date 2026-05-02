@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Eye, Heart, ShoppingCart, Star } from "lucide-react";
 import { Link } from "react-router-dom";
 
+import { useCart } from "@/contexts/CartContext";
 import { useWishlist } from "@/contexts/WishlistContext";
 import { CURRENCY_SYMBOL, DEFAULT_LANG } from "@/lib/constants";
 import { getLocalizedField, type Product } from "@/types";
@@ -21,6 +22,7 @@ const TAG_COLORS: Record<string, string> = {
 
 const ProductCard = ({ product }: ProductCardProps) => {
   const { isInWishlist, toggle } = useWishlist();
+  const { addItem } = useCart();
   const liked = isInWishlist(product.id);
   const name = getLocalizedField(product, "name", DEFAULT_LANG);
   const tag = product.tags?.find((t) => TAG_COLORS[t]) ?? product.tags?.[0];
@@ -38,7 +40,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
   const handleAddToCart = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    // Wired to CartContext in commit 12
+    if (product.stock > 0) addItem(product);
   };
 
   return (
