@@ -23,7 +23,7 @@ function App() {
     <ErrorBoundary>
       <HelmetProvider>
         <ThemeProvider>
-          <BrowserRouter>
+          <BrowserRouter basename={import.meta.env.BASE_URL}>
             <WishlistProvider>
               <CartProvider>
                 <div className="flex min-h-screen flex-col bg-background text-foreground">

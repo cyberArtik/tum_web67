@@ -152,7 +152,7 @@ export const MOCK_PRODUCTS: Product[] = [
   {
     id: 6,
     article_id: "FK-0006",
-    name_ro: "Joc de masă „Aventurierii"",
+    name_ro: "Joc de masa Aventurierii",
     name_ru: "Настольная игра «Авантюристы»",
     name_en: "Board Game: The Adventurers",
     description_ro: "Strategie și aventură pentru întreaga familie.",
