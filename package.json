@@ -1,9 +1,9 @@
 {
-  "name": "internet-toys",
+  "name": "funkids",
   "private": true,
   "version": "0.1.0",
   "type": "module",
-  "description": "Internet Toys — client-side toy catalog (Lab 6) with JWT-protected REST API (Lab 7).",
+  "description": "funkids — playful online toy catalog (Lab 6) with JWT-protected REST API (Lab 7).",
   "scripts": {
     "dev": "vite",
     "build": "vite build",

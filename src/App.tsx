@@ -1,3 +1,17 @@
+import { Heart, Sparkles } from "lucide-react";
+
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+
 function App() {
   return (
     <main className="min-h-screen flex flex-col items-center justify-center bg-background text-foreground px-6 text-center">
