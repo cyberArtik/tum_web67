@@ -6,6 +6,7 @@ import MobileBottomNav from "@/components/layout/MobileBottomNav";
 import Catalog from "@/pages/Catalog";
 import Index from "@/pages/Index";
 import NotFound from "@/pages/NotFound";
+import ProductDetail from "@/pages/ProductDetail";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/catalog" element={<Catalog />} />
+            <Route path="/product/:id" element={<ProductDetail />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </main>
