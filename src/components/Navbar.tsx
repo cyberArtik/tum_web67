@@ -1,9 +1,7 @@
 import { useState } from "react";
-import { useTranslation } from "react-i18next";
 import { Link, useNavigate } from "react-router-dom";
 import { Heart, Menu, Phone, Search, ShoppingCart, Truck, X } from "lucide-react";
 
-import LanguageSwitcher from "@/components/LanguageSwitcher";
 import ThemeToggle from "@/components/ThemeToggle";
 import { useCart } from "@/contexts/CartContext";
 import { useWishlist } from "@/contexts/WishlistContext";
@@ -13,7 +11,6 @@ const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const navigate = useNavigate();
-  const { t } = useTranslation();
   const { count: wishlistCount } = useWishlist();
   const { totalItems: cartCount } = useCart();
 
@@ -37,10 +34,9 @@ const Navbar = () => {
             </a>
             <span className="flex items-center gap-1.5 text-background/70">
               <Truck className="h-3 w-3" />
-              {t("nav.free_shipping_strip")}
+              Free shipping over 500 Lei
             </span>
           </div>
-          <LanguageSwitcher />
         </div>
       </div>
 
@@ -55,13 +51,13 @@ const Navbar = () => {
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder={t("nav.search_placeholder")}
+              placeholder="Search toys, brands, ages..."
               className="w-full rounded-full border border-border bg-muted/70 px-4 py-2.5 pr-12 font-body text-sm outline-none transition-all placeholder:text-muted-foreground/60 focus:border-primary focus:bg-card"
             />
             <button
               type="submit"
               className="absolute right-1 top-1/2 -translate-y-1/2 rounded-full bg-primary p-2 text-primary-foreground transition-opacity hover:opacity-90"
-              aria-label={t("nav.search")}
+              aria-label="Search"
             >
               <Search className="h-4 w-4" />
             </button>
@@ -72,7 +68,7 @@ const Navbar = () => {
             <button
               onClick={() => navigate("/wishlist")}
               className="relative hidden rounded-full p-2 transition-colors hover:bg-muted sm:flex"
-              aria-label={t("nav.wishlist")}
+              aria-label="Wishlist"
             >
               <Heart className="h-5 w-5 text-foreground/70" />
               {wishlistCount > 0 && (
@@ -84,7 +80,7 @@ const Navbar = () => {
             <button
               onClick={() => navigate("/cart")}
               className="relative rounded-full p-2 transition-colors hover:bg-muted"
-              aria-label={t("nav.cart")}
+              aria-label="Cart"
             >
               <ShoppingCart className="h-5 w-5 text-foreground/70" />
               {cartCount > 0 && (
@@ -96,7 +92,7 @@ const Navbar = () => {
             <button
               onClick={() => setMobileOpen((v) => !v)}
               className="rounded-full p-2 transition-colors hover:bg-muted md:hidden"
-              aria-label={t("nav.menu")}
+              aria-label="Menu"
             >
               {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </button>
@@ -109,7 +105,7 @@ const Navbar = () => {
               to="/catalog"
               className="rounded-full px-3 py-1.5 font-body font-semibold text-foreground/70 transition-colors hover:bg-muted/50 hover:text-primary"
             >
-              {t("nav.all")}
+              All
             </Link>
             {CATEGORIES.map((cat) => (
               <Link
@@ -131,26 +127,23 @@ const Navbar = () => {
                   type="text"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  placeholder={t("nav.search_placeholder")}
+                  placeholder="Search toys..."
                   className="w-full rounded-full border border-border bg-muted/70 px-4 py-2 pr-10 font-body text-sm outline-none focus:border-primary"
                 />
                 <button
                   type="submit"
                   className="absolute right-1 top-1/2 -translate-y-1/2 rounded-full bg-primary p-1.5 text-primary-foreground"
-                  aria-label={t("nav.search")}
+                  aria-label="Search"
                 >
                   <Search className="h-4 w-4" />
                 </button>
               </form>
-              <div className="mb-2 flex justify-center">
-                <LanguageSwitcher />
-              </div>
               <Link
                 to="/catalog"
                 onClick={() => setMobileOpen(false)}
                 className="rounded-xl px-3 py-2 font-body font-semibold text-foreground/70 hover:bg-muted/50 hover:text-primary"
               >
-                {t("nav.all")}
+                All toys
               </Link>
               {CATEGORIES.map((cat) => (
                 <Link
