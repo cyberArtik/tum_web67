@@ -1,0 +1,106 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&family=Quicksand:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 45 100% 97%;
+    --foreground: 260 30% 15%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 260 30% 15%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 260 30% 15%;
+
+    --primary: 340 82% 62%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 175 65% 55%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 45 40% 92%;
+    --muted-foreground: 260 10% 45%;
+
+    --accent: 45 95% 62%;
+    --accent-foreground: 260 30% 15%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 260 15% 88%;
+    --input: 260 15% 88%;
+    --ring: 340 82% 62%;
+
+    --radius: 1rem;
+
+    --fun-purple: 270 70% 65%;
+    --fun-green: 145 60% 50%;
+    --fun-orange: 25 95% 60%;
+    --fun-blue: 210 85% 60%;
+
+    --font-display: 'Fredoka', sans-serif;
+    --font-body: 'Quicksand', sans-serif;
+
+    --shadow-toy: 0 8px 30px -8px hsl(340 82% 62% / 0.2);
+    --shadow-card: 0 4px 20px -4px hsl(260 30% 15% / 0.08);
+    --shadow-hover: 0 12px 40px -8px hsl(340 82% 62% / 0.25);
+  }
+
+  .dark {
+    --background: 260 25% 8%;
+    --foreground: 45 30% 95%;
+    --card: 260 25% 12%;
+    --card-foreground: 45 30% 95%;
+    --popover: 260 25% 12%;
+    --popover-foreground: 45 30% 95%;
+    --primary: 340 82% 62%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 175 65% 55%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 260 20% 18%;
+    --muted-foreground: 260 10% 60%;
+    --accent: 45 95% 62%;
+    --accent-foreground: 260 30% 15%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 260 20% 22%;
+    --input: 260 20% 22%;
+    --ring: 340 82% 62%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-body);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+  }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: var(--font-display);
+  }
+  .font-body {
+    font-family: var(--font-body);
+  }
+  .shadow-toy {
+    box-shadow: var(--shadow-toy);
+  }
+  .shadow-card {
+    box-shadow: var(--shadow-card);
+  }
+  .shadow-hover {
+    box-shadow: var(--shadow-hover);
+  }
+}

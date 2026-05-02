@@ -1,23 +1,25 @@
 function App() {
   return (
-    <main
-      style={{
-        minHeight: "100vh",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-        fontFamily: "system-ui, sans-serif",
-        background: "#fffaf0",
-        color: "#241a3a",
-        textAlign: "center",
-        padding: "2rem",
-      }}
-    >
-      <h1 style={{ fontSize: "3rem", margin: 0 }}>Internet Toys</h1>
-      <p style={{ marginTop: "0.5rem", opacity: 0.7 }}>
-        Vite + React + TypeScript scaffold. Lab 6 / Lab 7 — TUM Web Programming.
+    <main className="min-h-screen flex flex-col items-center justify-center bg-background text-foreground px-6 text-center">
+      <h1 className="font-display text-5xl text-primary">Internet Toys</h1>
+      <p className="mt-2 max-w-md text-muted-foreground">
+        Tailwind tokens and custom theme are wired up. Light tokens are active;
+        dark tokens are ready for the upcoming theme toggle.
       </p>
+      <div className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-4">
+        <span className="rounded-md bg-primary px-4 py-2 text-primary-foreground shadow-toy">
+          primary
+        </span>
+        <span className="rounded-md bg-secondary px-4 py-2 text-secondary-foreground">
+          secondary
+        </span>
+        <span className="rounded-md bg-accent px-4 py-2 text-accent-foreground">
+          accent
+        </span>
+        <span className="rounded-md bg-muted px-4 py-2 text-muted-foreground">
+          muted
+        </span>
+      </div>
     </main>
   );
 }
