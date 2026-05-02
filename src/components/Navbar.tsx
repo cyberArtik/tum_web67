@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Heart, Menu, Phone, Search, ShoppingCart, Truck, X } from "lucide-react";
 
+import ThemeToggle from "@/components/ThemeToggle";
 import { useCart } from "@/contexts/CartContext";
 import { useWishlist } from "@/contexts/WishlistContext";
 import { CATEGORIES } from "@/data/products";
@@ -63,6 +64,7 @@ const Navbar = () => {
           </form>
 
           <div className="ml-auto flex items-center gap-1">
+            <ThemeToggle />
             <button
               onClick={() => navigate("/wishlist")}
               className="relative hidden rounded-full p-2 transition-colors hover:bg-muted sm:flex"
