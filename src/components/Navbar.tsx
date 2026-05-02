@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Heart, Menu, Phone, Search, ShoppingCart, Truck, X } from "lucide-react";
 
+import { useCart } from "@/contexts/CartContext";
 import { useWishlist } from "@/contexts/WishlistContext";
 import { CATEGORIES } from "@/data/products";
 
@@ -10,6 +11,7 @@ const Navbar = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const navigate = useNavigate();
   const { count: wishlistCount } = useWishlist();
+  const { totalItems: cartCount } = useCart();
 
   const handleSearchSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -75,10 +77,15 @@ const Navbar = () => {
             </button>
             <button
               onClick={() => navigate("/cart")}
-              className="rounded-full p-2 transition-colors hover:bg-muted"
+              className="relative rounded-full p-2 transition-colors hover:bg-muted"
               aria-label="Cart"
             >
               <ShoppingCart className="h-5 w-5 text-foreground/70" />
+              {cartCount > 0 && (
+                <span className="absolute -right-0.5 -top-0.5 flex h-[18px] min-w-[18px] items-center justify-center rounded-full bg-primary px-1 text-[10px] font-bold text-primary-foreground">
+                  {cartCount}
+                </span>
+              )}
             </button>
             <button
               onClick={() => setMobileOpen((v) => !v)}

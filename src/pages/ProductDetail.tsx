@@ -17,6 +17,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 
 import ProductCard from "@/components/ProductCard";
 import { Button } from "@/components/ui/button";
+import { useCart } from "@/contexts/CartContext";
 import { useWishlist } from "@/contexts/WishlistContext";
 import { getProductById, MOCK_PRODUCTS } from "@/data/products";
 import { CURRENCY_SYMBOL, DEFAULT_LANG } from "@/lib/constants";
@@ -26,6 +27,7 @@ const ProductDetail = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const { isInWishlist, toggle } = useWishlist();
+  const { addItem } = useCart();
   const [quantity, setQuantity] = useState(1);
 
   const product = getProductById(Number(id));
@@ -57,7 +59,7 @@ const ProductDetail = () => {
   ).slice(0, 4);
 
   const handleAddToCart = () => {
-    // Wired to CartContext in commit 12
+    addItem(product, quantity);
     navigate("/cart");
   };
 
