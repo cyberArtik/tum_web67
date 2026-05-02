@@ -1,12 +1,6 @@
 export type Language = "ro" | "ru" | "en";
 
-export type AgeGroup =
-  | "0-1"
-  | "1-3"
-  | "3-5"
-  | "5-8"
-  | "8-12"
-  | "12+";
+export type AgeGroup = "0-2" | "3-5" | "6-8" | "9-12" | "13+";
 
 export interface Product {
   id: number;
