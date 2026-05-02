@@ -1,8 +1,8 @@
-import { useState } from "react";
 import { motion } from "framer-motion";
 import { Eye, Heart, ShoppingCart, Star } from "lucide-react";
 import { Link } from "react-router-dom";
 
+import { useWishlist } from "@/contexts/WishlistContext";
 import { CURRENCY_SYMBOL, DEFAULT_LANG } from "@/lib/constants";
 import { getLocalizedField, type Product } from "@/types";
 
@@ -20,7 +20,8 @@ const TAG_COLORS: Record<string, string> = {
 };
 
 const ProductCard = ({ product }: ProductCardProps) => {
-  const [liked, setLiked] = useState(false);
+  const { isInWishlist, toggle } = useWishlist();
+  const liked = isInWishlist(product.id);
   const name = getLocalizedField(product, "name", DEFAULT_LANG);
   const tag = product.tags?.find((t) => TAG_COLORS[t]) ?? product.tags?.[0];
 
@@ -31,7 +32,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
   const handleLike = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    setLiked((v) => !v);
+    toggle(product.id);
   };
 
   const handleAddToCart = (e: React.MouseEvent) => {
@@ -49,7 +50,6 @@ const ProductCard = ({ product }: ProductCardProps) => {
       transition={{ type: "spring", stiffness: 260, damping: 26, mass: 0.6 }}
       className="group flex flex-col overflow-hidden rounded-2xl bg-card shadow-card hover:shadow-hover"
     >
-      {/* Image */}
       <div className="relative aspect-square overflow-hidden bg-muted">
         <Link to={`/product/${product.id}`}>
           <img
@@ -60,7 +60,6 @@ const ProductCard = ({ product }: ProductCardProps) => {
           />
         </Link>
 
-        {/* Badges */}
         <div className="absolute left-2.5 top-2.5 flex flex-col gap-1.5">
           {tag && (
             <span
@@ -76,7 +75,6 @@ const ProductCard = ({ product }: ProductCardProps) => {
           )}
         </div>
 
-        {/* Action buttons */}
         <div className="absolute right-2.5 top-2.5 flex flex-col gap-1.5">
           <button
             onClick={handleLike}
@@ -98,7 +96,6 @@ const ProductCard = ({ product }: ProductCardProps) => {
           </Link>
         </div>
 
-        {/* Hover-reveal add to cart */}
         <div className="absolute inset-x-0 bottom-0 translate-y-full p-2.5 transition-transform duration-300 group-hover:translate-y-0">
           <button
             onClick={handleAddToCart}
@@ -108,7 +105,6 @@ const ProductCard = ({ product }: ProductCardProps) => {
           </button>
         </div>
 
-        {/* Out of stock */}
         {product.stock === 0 && (
           <div className="absolute inset-0 flex items-center justify-center bg-background/60 backdrop-blur-[2px]">
             <span className="rounded-full bg-card/90 px-4 py-2 font-display text-sm font-bold text-foreground/70">
@@ -118,7 +114,6 @@ const ProductCard = ({ product }: ProductCardProps) => {
         )}
       </div>
 
-      {/* Info */}
       <Link to={`/product/${product.id}`} className="flex flex-1 flex-col gap-1.5 p-3.5">
         <div className="flex items-center gap-1">
           {Array.from({ length: 5 }).map((_, i) => (
