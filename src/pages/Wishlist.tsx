@@ -5,11 +5,12 @@ import { Link } from "react-router-dom";
 import ProductCard from "@/components/ProductCard";
 import { Button } from "@/components/ui/button";
 import { useWishlist } from "@/contexts/WishlistContext";
-import { MOCK_PRODUCTS } from "@/data/products";
+import { useProducts } from "@/hooks/useProducts";
 
 const Wishlist = () => {
   const { wishlistIds, clear } = useWishlist();
-  const wishlistProducts = MOCK_PRODUCTS.filter((p) => wishlistIds.has(p.id));
+  const products = useProducts();
+  const wishlistProducts = products.filter((p) => wishlistIds.has(p.id));
 
   return (
     <main className="container mx-auto min-h-[60vh] px-4 py-10">

@@ -15,7 +15,8 @@ import { Link, useSearchParams } from "react-router-dom";
 
 import ProductCard from "@/components/ProductCard";
 import { Button } from "@/components/ui/button";
-import { AGE_GROUPS, CATEGORIES, MOCK_PRODUCTS } from "@/data/products";
+import { AGE_GROUPS, CATEGORIES } from "@/data/products";
+import { useProducts } from "@/hooks/useProducts";
 import { DEFAULT_LANG } from "@/lib/constants";
 import { getLocalizedField, type SortOption } from "@/types";
 
@@ -23,7 +24,7 @@ const PRICE_MAX = 2000;
 
 const Catalog = () => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const products = MOCK_PRODUCTS;
+  const products = useProducts();
 
   const brands = useMemo(
     () => [...new Set(products.map((p) => p.brand).filter(Boolean) as string[])],

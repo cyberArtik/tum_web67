@@ -2,14 +2,15 @@ import HeroSection from "@/components/HeroSection";
 import ProductGrid from "@/components/ProductGrid";
 import ProductSection from "@/components/ProductSection";
 import PromoBar from "@/components/PromoBar";
-import { MOCK_PRODUCTS } from "@/data/products";
+import { useProducts } from "@/hooks/useProducts";
 
 const Index = () => {
-  const saleProducts = MOCK_PRODUCTS.filter(
+  const products = useProducts();
+  const saleProducts = products.filter(
     (p) => p.original_price && p.original_price > p.price,
   );
-  const plushProducts = MOCK_PRODUCTS.filter((p) => p.category === "plush");
-  const stemProducts = MOCK_PRODUCTS.filter((p) => p.tags.includes("stem"));
+  const plushProducts = products.filter((p) => p.category === "plush");
+  const stemProducts = products.filter((p) => p.tags.includes("stem"));
 
   return (
     <>
