@@ -1,0 +1,21 @@
+{
+  "name": "funkids-server",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "funkids — JWT-protected REST API (Lab 7).",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "start": "tsx src/index.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "express": "^4.21.0"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/node": "^22.16.5",
+    "tsx": "^4.21.0",
+    "typescript": "^5.8.3"
+  }
+}
