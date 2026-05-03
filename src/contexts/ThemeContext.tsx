@@ -1,62 +1,37 @@
-import {
-  createContext,
-  useCallback,
-  useContext,
-  useEffect,
-  useState,
-  type ReactNode,
-} from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Moon, Sun } from "lucide-react";
 
-export type Theme = "light" | "dark";
+import { useTheme } from "@/contexts/ThemeContext";
 
-interface ThemeContextValue {
-  theme: Theme;
-  setTheme: (theme: Theme) => void;
-  toggle: () => void;
-}
-
-const ThemeContext = createContext<ThemeContextValue | null>(null);
-
-const STORAGE_KEY = "funkids-theme";
-
-function readStoredTheme(): Theme | null {
-  if (typeof window === "undefined") return null;
-  const v = window.localStorage.getItem(STORAGE_KEY);
-  return v === "dark" || v === "light" ? v : null;
-}
-
-function applyTheme(theme: Theme) {
-  if (typeof document === "undefined") return;
-  const root = document.documentElement;
-  if (theme === "dark") root.classList.add("dark");
-  else root.classList.remove("dark");
-  root.style.colorScheme = theme;
-}
-
-export function ThemeProvider({ children }: { children: ReactNode }) {
-  const [theme, setThemeState] = useState<Theme>(() => readStoredTheme() ?? "light");
-
-  useEffect(() => {
-    applyTheme(theme);
-    if (typeof window !== "undefined") {
-      window.localStorage.setItem(STORAGE_KEY, theme);
-    }
-  }, [theme]);
-
-  const setTheme = useCallback((t: Theme) => setThemeState(t), []);
-  const toggle = useCallback(() => setThemeState((t) => (t === "dark" ? "light" : "dark")), []);
+const ThemeToggle = () => {
+  const { theme, toggle } = useTheme();
+  const isDark = theme === "dark";
 
   return (
-    <ThemeContext.Provider value={{ theme, setTheme, toggle }}>
-      {children}
-    </ThemeContext.Provider>
+    <button
+      onClick={toggle}
+      className="relative flex h-9 w-9 items-center justify-center rounded-full transition-colors hover:bg-muted"
+      aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
+      title={isDark ? "Switch to light mode" : "Switch to dark mode"}
+    >
+      <AnimatePresence mode="wait" initial={false}>
+        <motion.span
+          key={theme}
+          initial={{ rotate: -90, opacity: 0, scale: 0.6 }}
+          animate={{ rotate: 0, opacity: 1, scale: 1 }}
+          exit={{ rotate: 90, opacity: 0, scale: 0.6 }}
+          transition={{ duration: 0.18, ease: "easeOut" }}
+          className="inline-flex"
+        >
+          {isDark ? (
+            <Moon className="h-5 w-5 text-foreground/80" />
+          ) : (
+            <Sun className="h-5 w-5 text-foreground/80" />
+          )}
+        </motion.span>
+      </AnimatePresence>
+    </button>
   );
-}
+};
 
-export function useTheme() {
-  const ctx = useContext(ThemeContext);
-  if (!ctx) {
-    throw new Error("useTheme must be used within a ThemeProvider");
-  }
-  return ctx;
-}
+export default ThemeToggle;

@@ -1,40 +1,69 @@
-import cors from "cors";
-import express from "express";
-import swaggerUi from "swagger-ui-express";
+export type Language = "ro" | "ru" | "en";
 
-import { config } from "./config";
-import { errorHandler, notFoundHandler } from "./middleware/errors";
-import { requestLogger } from "./middleware/logger";
-import { openApiSpec } from "./openapi";
-import { productsRouter } from "./routes/products";
-import { tokenRouter } from "./routes/token";
+export type AgeGroup = "0-2" | "3-5" | "6-8" | "9-12" | "13+";
 
-const app = express();
+export interface Product {
+  id: number;
+  article_id: string;
+  name_ro: string;
+  name_ru: string;
+  name_en: string;
+  description_ro?: string;
+  description_ru?: string;
+  description_en?: string;
+  price: number;
+  original_price?: number;
+  stock: number;
+  category: string;
+  brand?: string;
+  age_group?: AgeGroup;
+  image_url: string;
+  tags: string[];
+  rating: number;
+  reviews_count?: number;
+  is_active?: boolean;
+  created_at: string;
+}
 
-app.use(cors());
-app.use(express.json({ limit: "1mb" }));
-app.use(requestLogger);
+export type ProductDraft = Omit<Product, "id" | "created_at"> & {
+  id?: number;
+  created_at?: string;
+};
 
-app.get("/health", (_req, res) => {
-  res.status(200).json({ status: "ok", service: "funkids-api" });
-});
+export interface CartItem {
+  product: Product;
+  quantity: number;
+}
 
-app.use(
-  "/docs",
-  swaggerUi.serve,
-  swaggerUi.setup(openApiSpec, { customSiteTitle: "funkids API — Swagger UI" }),
-);
-app.get("/openapi.json", (_req, res) => res.json(openApiSpec));
+export type ProductLocalizedField = "name" | "description";
 
-app.use("/token", tokenRouter);
-app.use("/products", productsRouter);
+export function getLocalizedField(
+  product: Product,
+  field: ProductLocalizedField,
+  lang: Language,
+): string {
+  const key = `${field}_${lang}` as keyof Product;
+  return (
+    (product[key] as string) ||
+    (product[`${field}_ro` as keyof Product] as string) ||
+    ""
+  );
+}
 
-app.use(notFoundHandler);
-app.use(errorHandler);
+export type SortOption =
+  | "newest"
+  | "price-asc"
+  | "price-desc"
+  | "rating"
+  | "popular";
 
-app.listen(config.port, () => {
-  // eslint-disable-next-line no-console
-  console.log(`funkids API running at http://localhost:${config.port}`);
-  // eslint-disable-next-line no-console
-  console.log(`           docs at http://localhost:${config.port}/docs`);
-});
+export interface ProductFilter {
+  search?: string;
+  category?: string;
+  age_group?: AgeGroup;
+  brand?: string;
+  min_price?: number;
+  max_price?: number;
+  in_stock_only?: boolean;
+  sort?: SortOption;
+}
