@@ -1,10 +1,21 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link, useNavigate } from "react-router-dom";
-import { Heart, Menu, Phone, Search, ShoppingCart, Truck, X } from "lucide-react";
+import {
+  Heart,
+  KeyRound,
+  LogOut,
+  Menu,
+  Phone,
+  Search,
+  ShoppingCart,
+  Truck,
+  X,
+} from "lucide-react";
 
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 import ThemeToggle from "@/components/ThemeToggle";
+import { useAuth } from "@/contexts/AuthContext";
 import { useCart } from "@/contexts/CartContext";
 import { useWishlist } from "@/contexts/WishlistContext";
 import { CATEGORIES } from "@/data/products";
@@ -16,6 +27,7 @@ const Navbar = () => {
   const { t } = useTranslation();
   const { count: wishlistCount } = useWishlist();
   const { totalItems: cartCount } = useCart();
+  const { role, logout } = useAuth();
 
   const handleSearchSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -69,6 +81,27 @@ const Navbar = () => {
 
           <div className="ml-auto flex items-center gap-1">
             <ThemeToggle />
+
+            {role ? (
+              <button
+                onClick={logout}
+                className="hidden items-center gap-1.5 rounded-full border border-border px-2.5 py-1 text-xs font-bold text-foreground/80 transition-colors hover:border-primary hover:text-primary sm:flex"
+                title={t("auth.logout")}
+              >
+                <LogOut className="h-3.5 w-3.5" />
+                <span className="font-display uppercase">{role}</span>
+              </button>
+            ) : (
+              <Link
+                to="/login"
+                className="hidden rounded-full p-2 transition-colors hover:bg-muted sm:flex"
+                aria-label={t("auth.login")}
+                title={t("auth.login")}
+              >
+                <KeyRound className="h-5 w-5 text-foreground/70" />
+              </Link>
+            )}
+
             <button
               onClick={() => navigate("/wishlist")}
               className="relative hidden rounded-full p-2 transition-colors hover:bg-muted sm:flex"
@@ -145,6 +178,14 @@ const Navbar = () => {
               <div className="mb-2 flex justify-center">
                 <LanguageSwitcher />
               </div>
+              <Link
+                to={role ? "/login" : "/login"}
+                onClick={() => setMobileOpen(false)}
+                className="flex items-center gap-2 rounded-xl px-3 py-2 font-body font-semibold text-foreground/70 hover:bg-muted/50 hover:text-primary"
+              >
+                <KeyRound className="h-4 w-4" />
+                {role ? `${role} (${t("auth.logout")})` : t("auth.login")}
+              </Link>
               <Link
                 to="/catalog"
                 onClick={() => setMobileOpen(false)}
