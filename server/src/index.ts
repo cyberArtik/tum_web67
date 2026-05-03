@@ -2,6 +2,7 @@ import express from "express";
 
 import { config } from "./config";
 import { productsRouter } from "./routes/products";
+import { tokenRouter } from "./routes/token";
 
 const app = express();
 
@@ -11,9 +12,9 @@ app.get("/health", (_req, res) => {
   res.status(200).json({ status: "ok", service: "funkids-api" });
 });
 
+app.use("/token", tokenRouter);
 app.use("/products", productsRouter);
 
-// 404 fallback for any unmatched route.
 app.use((_req, res) => {
   res.status(404).json({ error: "Not found" });
 });

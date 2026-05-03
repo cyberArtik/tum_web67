@@ -1,5 +1,6 @@
 import { Router } from "express";
 
+import { requirePermission } from "../middleware/auth";
 import {
   createProduct,
   deleteProduct,
@@ -28,8 +29,8 @@ function clampInt(value: unknown, min: number, max: number, fallback: number): n
   return Math.min(Math.max(n, min), max);
 }
 
-// GET /products?limit=20&offset=0
-productsRouter.get("/", async (req, res, next) => {
+// GET /products?limit=20&offset=0 — requires READ
+productsRouter.get("/", requirePermission("READ"), async (req, res, next) => {
   try {
     const limit = clampInt(req.query.limit, 1, 100, 20);
     const offset = clampInt(req.query.offset, 0, Number.MAX_SAFE_INTEGER, 0);
@@ -45,8 +46,8 @@ productsRouter.get("/", async (req, res, next) => {
   }
 });
 
-// GET /products/:id
-productsRouter.get("/:id", async (req, res, next) => {
+// GET /products/:id — requires READ
+productsRouter.get("/:id", requirePermission("READ"), async (req, res, next) => {
   try {
     const id = Number(req.params.id);
     if (!Number.isFinite(id) || id <= 0) {
@@ -60,8 +61,8 @@ productsRouter.get("/:id", async (req, res, next) => {
   }
 });
 
-// POST /products
-productsRouter.post("/", async (req, res, next) => {
+// POST /products — requires WRITE
+productsRouter.post("/", requirePermission("WRITE"), async (req, res, next) => {
   try {
     const body = req.body;
     if (!body || typeof body !== "object" || Array.isArray(body)) {
@@ -100,8 +101,8 @@ productsRouter.post("/", async (req, res, next) => {
   }
 });
 
-// PATCH /products/:id
-productsRouter.patch("/:id", async (req, res, next) => {
+// PATCH /products/:id — requires WRITE
+productsRouter.patch("/:id", requirePermission("WRITE"), async (req, res, next) => {
   try {
     const id = Number(req.params.id);
     if (!Number.isFinite(id) || id <= 0) {
@@ -115,8 +116,8 @@ productsRouter.patch("/:id", async (req, res, next) => {
   }
 });
 
-// DELETE /products/:id
-productsRouter.delete("/:id", async (req, res, next) => {
+// DELETE /products/:id — requires DELETE
+productsRouter.delete("/:id", requirePermission("DELETE"), async (req, res, next) => {
   try {
     const id = Number(req.params.id);
     if (!Number.isFinite(id) || id <= 0) {
