@@ -32,7 +32,7 @@ const SEO = ({
   const { i18n } = useTranslation();
   const lang = ((i18n.resolvedLanguage ?? i18n.language ?? "ro").slice(0, 2) as Language);
 
-  const fullTitle = title ? `${title} — ${SITE_NAME}` : `${SITE_NAME} — playful online toy store`;
+  const fullTitle = title ? `${title} — ${SITE_NAME}` : SITE_NAME;
   const desc = description ?? DEFAULT_DESC[lang] ?? DEFAULT_DESC.ro;
   const canonical = typeof window !== "undefined" ? window.location.href : "";
   const ogImage = image ?? (SITE_URL ? `${SITE_URL}/og-image.jpg` : undefined);

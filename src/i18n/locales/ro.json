@@ -85,6 +85,26 @@
     "operator_contact": "Te vom suna în curând pentru confirmare.",
     "back_home": "Înapoi acasă"
   },
+  "auth": {
+    "login": "Autentificare",
+    "logout": "Deconectare",
+    "login_desc": "Alege un rol și backend-ul va emite un JWT valabil 60 de secunde. Fără el, aplicația folosește date demo.",
+    "api_missing": "Backend neconfigurat — setează VITE_API_URL în .env (implicit: http://localhost:4000).",
+    "signed_in_as": "Autentificat ca",
+    "error": "Autentificare eșuată",
+    "token_note": "Token-urile durează 60 de secunde și se reîmprospătează automat.",
+    "skip_to_catalog": "Sari și vezi datele demo",
+    "perms": {
+      "read": "READ",
+      "read_write": "READ · WRITE",
+      "full": "READ · WRITE · DELETE"
+    },
+    "desc": {
+      "visitor": "Doar citire — răsfoiește catalogul prin API.",
+      "writer": "Citire plus creare și actualizare produse.",
+      "admin": "Acces complet, inclusiv ștergere."
+    }
+  },
   "not_found": {
     "title": "Pagină negăsită",
     "desc": "Jucăria pe care o căutai trebuie să se fi rostogolit sub canapea. Hai să te ducem înapoi la magazin.",

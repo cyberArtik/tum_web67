@@ -85,6 +85,26 @@
     "operator_contact": "We will call you shortly to confirm.",
     "back_home": "Back home"
   },
+  "auth": {
+    "login": "Login",
+    "logout": "Logout",
+    "login_desc": "Pick a role and the backend will issue you a 60-second JWT. Without one, the app falls back to mock data.",
+    "api_missing": "Backend not configured — set VITE_API_URL in your .env file (default: http://localhost:4000).",
+    "signed_in_as": "Signed in as",
+    "error": "Could not authenticate",
+    "token_note": "Tokens last 60 seconds and are refreshed automatically.",
+    "skip_to_catalog": "Skip and browse mock data",
+    "perms": {
+      "read": "READ",
+      "read_write": "READ · WRITE",
+      "full": "READ · WRITE · DELETE"
+    },
+    "desc": {
+      "visitor": "Read-only access — browse the catalog through the API.",
+      "writer": "Read plus create and update products.",
+      "admin": "Full access including delete."
+    }
+  },
   "not_found": {
     "title": "Page not found",
     "desc": "The toy you were looking for must have rolled under the couch. Let's get you back to the shop.",
